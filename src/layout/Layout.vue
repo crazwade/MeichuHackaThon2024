@@ -3,7 +3,7 @@ import HeaderMenu from '../components/Layout/HeaderMenu.vue'
 </script>
 
 <template>
-  <div class="flex flex-col w-svw h-svh">
+  <div class="flex flex-col w-dvw h-dvh">
     <!-- <HeaderMenu /> -->
     <RouterView />
   </div>
