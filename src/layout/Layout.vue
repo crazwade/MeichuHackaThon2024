@@ -1,5 +1,5 @@
-<script setup lang='ts'>
-import HeaderMenu from '../components/Layout/HeaderMenu.vue'
+<script setup lang="ts">
+import HeaderMenu from "../components/Layout/HeaderMenu.vue";
 </script>
 
 <template>
@@ -9,6 +9,4 @@ import HeaderMenu from '../components/Layout/HeaderMenu.vue'
   </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

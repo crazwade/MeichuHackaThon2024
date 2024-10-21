@@ -56,7 +56,7 @@ library.add(
   faSpinner,
   faPersonWalkingDashedLineArrowRight,
   faCarSide,
-  faClock
+  faClock,
 );
 
 const app = createApp(App);

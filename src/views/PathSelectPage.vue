@@ -23,7 +23,7 @@ const pathCardClick = (id: number) => {
 
   pathSelect.value = id;
 
-  const data = pathData.value.filter(d => d.id === id)[0];
+  const data = pathData.value.filter((d) => d.id === id)[0];
 
   if (data) {
     let locs = [
@@ -32,7 +32,7 @@ const pathCardClick = (id: number) => {
         lng: data.path_details[0].location.gps.lng,
       },
     ];
-    const newlocs = data.path_details.map(d => {
+    const newlocs = data.path_details.map((d) => {
       return {
         lng: d.destination.gps.lng,
         lat: d.destination.gps.lat,
@@ -115,11 +115,11 @@ const calctime = (s: string) => {
 
 const calcPercentage = (
   details: PathDetail[],
-  type: "公車" | "Bike" | "步行"
+  type: "公車" | "Bike" | "步行",
 ) => {
   const total = details.reduce((acc, cur) => calctime(cur.costTime) + acc, 0);
   const timePortion = details
-    .filter(each => typeof each.transport.type === typeof type)
+    .filter((each) => typeof each.transport.type === typeof type)
     .reduce((acc, cur) => calctime(cur.costTime) + acc, 0);
 
   const percentage = `${Math.round(total / timePortion)} %`;

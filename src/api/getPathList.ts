@@ -22,7 +22,7 @@ export interface GetPathListPayload {
  * @returns {Promise<Response>} 回傳路徑列表
  */
 export async function getPathList(
-  payload: GetPathListPayload
+  payload: GetPathListPayload,
 ): Promise<Response<Path[]>> {
   const { des, loc } = payload;
   try {

@@ -15,7 +15,7 @@ export interface GetPathDetailListPayload {
  * 取得路徑詳細列表
  */
 export async function getPathDetailList(
-  payload: GetPathDetailListPayload
+  payload: GetPathDetailListPayload,
 ): Promise<Response<Path>> {
   const { id } = payload;
   try {

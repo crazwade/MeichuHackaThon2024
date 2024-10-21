@@ -16,13 +16,13 @@
 export const imageLoader = (
   images: string[],
   onProgress?: (loaded: number, total: number) => void,
-  onError?: (error: any, url: string) => void
+  onError?: (error: any, url: string) => void,
 ): Promise<void> => {
   return new Promise<void>((resolve, reject) => {
     const totalImages = images.length;
     let loadedImages = 0;
 
-    const promises = images.map(url => {
+    const promises = images.map((url) => {
       return new Promise<void>((resolve, reject) => {
         const image = new Image();
         image.onload = () => {
@@ -47,7 +47,7 @@ export const imageLoader = (
       .then(() => {
         resolve();
       })
-      .catch(error => {
+      .catch((error) => {
         reject(error);
       });
   });

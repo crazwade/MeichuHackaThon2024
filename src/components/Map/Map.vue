@@ -31,11 +31,11 @@ onMounted(() => {
     {
       attribution: "&copy; Powered by Google",
       maxZoom: 19,
-    }
+    },
   ).addTo(map);
   // 增加地圖上標記圖層的元件
   const tooltip = Leaflet.marker(
-    Leaflet.latLng(24.789078616981914, 120.99579550204959)
+    Leaflet.latLng(24.789078616981914, 120.99579550204959),
   ).addTo(map);
   // 從第一個點開始規劃最短路徑
   Leaflet.Routing.control({

@@ -1,4 +1,3 @@
-
 import * as Leaflet from "leaflet";
 import "leaflet-routing-machine";
 
@@ -13,10 +12,13 @@ function createButton(label: string, container: HTMLElement) {
   return btn;
 }
 
-export const generateMap = (locs: {
-  lng: string,
-  lat: string
-}[], id: string) => {
+export const generateMap = (
+  locs: {
+    lng: string;
+    lat: string;
+  }[],
+  id: string,
+) => {
   const totalLng = locs.reduce((a, b) => a + Number(b.lng), 0);
   const totalLat = locs.reduce((a, b) => a + Number(b.lat), 0);
   // 初始化地圖
@@ -42,7 +44,7 @@ export const generateMap = (locs: {
     {
       attribution: "&copy; Powered by Google",
       maxZoom: 19,
-    }
+    },
   ).addTo(map);
   // 增加地圖上標記圖層的元件
   // const tooltip = Leaflet.marker(
@@ -51,9 +53,9 @@ export const generateMap = (locs: {
   // 從第一個點開始規劃最短路徑
   Leaflet.Routing.control({
     waypoints: [
-      ...locs.map(loc => Leaflet.latLng(Number(loc.lng), Number(loc.lat))),
+      ...locs.map((loc) => Leaflet.latLng(Number(loc.lng), Number(loc.lat))),
     ],
   })
     .on("routingstart", function (e) {}) // 也可以監聽事件
     .addTo(map);
-}
+};

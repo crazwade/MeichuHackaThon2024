@@ -3,25 +3,25 @@ import SideInfo from "../components/PathPage/SideInfo.vue";
 import BottomInfo from "../components/PathPage/BottomInfo.vue";
 import LoadingDialog from "../components/LoadingDialog.vue";
 import PopUpDoalog from "../components/PathPage/PopUpDoalog.vue";
-import { getPathDetailList } from '../api';
-import type { GetPathDetailListPayload } from '../api';
-import type { Path, PathDetail } from '../type';
-import { generateMap } from '../common/generateMap'
+import { getPathDetailList } from "../api";
+import type { GetPathDetailListPayload } from "../api";
+import type { Path, PathDetail } from "../type";
+import { generateMap } from "../common/generateMap";
 
 const route = useRoute();
 const router = useRouter();
-const popuptitle = ref('');
+const popuptitle = ref("");
 const mapId = ref<number>(0);
 const data = reactive<Path>({
   id: 0,
-  destination: '-',
-  location: '-',
-  costTime: '-',
-  arrivalTime: '-',
+  destination: "-",
+  location: "-",
+  costTime: "-",
+  arrivalTime: "-",
   transportComp: {
-    '公車': 0,
-    'Bike': 0,
-    '步行': 0
+    公車: 0,
+    Bike: 0,
+    步行: 0,
   },
   crowding: 0,
   path_details: [] as PathDetail[],
@@ -33,8 +33,8 @@ const totalSteps = ref<number>(0);
 const LoadingDialogVisable = ref<boolean>(false);
 const PopUpDoalogVisable = ref<boolean>(false);
 
-const steps = (action: 'next' | 'pervious') => {
-  if (action === 'next') {
+const steps = (action: "next" | "pervious") => {
+  if (action === "next") {
     if (completedSteps.value === totalSteps.value) {
       return;
     }
@@ -46,13 +46,13 @@ const steps = (action: 'next' | 'pervious') => {
     const locs = [
       {
         lng: location.gps.lng,
-        lat: location.gps.lat
+        lat: location.gps.lat,
       },
       {
         lng: destination.gps.lng,
-        lat: destination.gps.lat
-      }
-    ]
+        lat: destination.gps.lat,
+      },
+    ];
 
     const timestampDiv = document.createElement("div");
     const oldMap = document.getElementById(`map${mapId.value}`);
@@ -68,11 +68,11 @@ const steps = (action: 'next' | 'pervious') => {
     generateMap(locs, timestampDiv.id);
 
     if (completedSteps.value === totalSteps.value) {
-      handlePopUpDialog('抵達');
+      handlePopUpDialog("抵達");
     }
   }
 
-  if (action === 'pervious') {
+  if (action === "pervious") {
     if (completedSteps.value === 0) {
       return;
     }
@@ -84,13 +84,13 @@ const steps = (action: 'next' | 'pervious') => {
     const locs = [
       {
         lng: location.gps.lng,
-        lat: location.gps.lat
+        lat: location.gps.lat,
       },
       {
         lng: destination.gps.lng,
-        lat: destination.gps.lat
-      }
-    ]
+        lat: destination.gps.lat,
+      },
+    ];
 
     const timestampDiv = document.createElement("div");
     const oldMap = document.getElementById(`map${mapId.value}`);
@@ -105,25 +105,28 @@ const steps = (action: 'next' | 'pervious') => {
 
     generateMap(locs, timestampDiv.id);
   }
-}
+};
 
 const handlePopUpDialog = (title: string) => {
   popuptitle.value = title;
   PopUpDoalogVisable.value = true;
-}
+};
 
-watch(() => completedSteps.value, (step: number) => {
-  router.replace({
-    query: {
-      ...router.currentRoute.value.query,
-      step: String(step),
-    },
-  });
+watch(
+  () => completedSteps.value,
+  (step: number) => {
+    router.replace({
+      query: {
+        ...router.currentRoute.value.query,
+        step: String(step),
+      },
+    });
 
-  if (step === totalSteps.value) {
-    handlePopUpDialog('抵達');
-  }
-})
+    if (step === totalSteps.value) {
+      handlePopUpDialog("抵達");
+    }
+  },
+);
 
 // import * as Leaflet from "leaflet";
 // import "leaflet-routing-machine";
@@ -183,21 +186,20 @@ watch(() => completedSteps.value, (step: number) => {
 //     .addTo(map);
 // }
 
-
-onMounted(async() => {
+onMounted(async () => {
   LoadingDialogVisable.value = true;
   const { id, step } = route.query;
 
   // todo 未正確傳遞 query string value 導回首頁
-  if(!id) {
+  if (!id) {
     LoadingDialogVisable.value = false;
-    handlePopUpDialog('路徑編號錯誤');
+    handlePopUpDialog("路徑編號錯誤");
     return;
   }
 
   const payload: GetPathDetailListPayload = {
     id: Number(id),
-  }
+  };
 
   const response = await getPathDetailList(payload);
 
@@ -217,18 +219,19 @@ onMounted(async() => {
 
   LoadingDialogVisable.value = false;
 
-  const { destination, location } = response.data.path_details[completedSteps.value];
+  const { destination, location } =
+    response.data.path_details[completedSteps.value];
 
   const locs = [
     {
       lng: location.gps.lng,
-      lat: location.gps.lat
+      lat: location.gps.lat,
     },
     {
       lng: destination.gps.lng,
-      lat: destination.gps.lat
-    }
-  ]
+      lat: destination.gps.lat,
+    },
+  ];
 
   const timestampDiv = document.createElement("div");
   mapId.value = Date.now();
@@ -238,18 +241,23 @@ onMounted(async() => {
   document.getElementById(timestampDiv.id)!.style.width = "100dvw";
 
   generateMap(locs, timestampDiv.id);
-})
+});
 </script>
 
 <template>
-  <div
-    class="relative w-full h-full flex flex-col items-center p-4 text-white"
-  >
-    <div ref="mapRef" class="z-20 absolute w-[100dvw] h-[100dvh] top-0 left-0 flex justify-center items-center bg-gray-900 text-black" />
-    <div class="z-20 absolute top-4 text-[1.5rem] font-extrabold text-white bg-gray-800 py-2 px-5 rounded-lg">
+  <div class="relative w-full h-full flex flex-col items-center p-4 text-white">
+    <div
+      ref="mapRef"
+      class="z-20 absolute w-[100dvw] h-[100dvh] top-0 left-0 flex justify-center items-center bg-gray-900 text-black"
+    />
+    <div
+      class="z-20 absolute top-4 text-[1.5rem] font-extrabold text-white bg-gray-800 py-2 px-5 rounded-lg"
+    >
       目的地：{{ data.destination }}
     </div>
-    <div class="z-20 absolute w-fit h-fit top-24 left-10 flex flex-col px-5 py-4 bg-gray-800 rounded-xl select-none">
+    <div
+      class="z-20 absolute w-fit h-fit top-24 left-10 flex flex-col px-5 py-4 bg-gray-800 rounded-xl select-none"
+    >
       <SideInfo
         :costTime="data.path_details[completedSteps]?.costTime ?? '-'"
         :completedSteps="completedSteps"
@@ -257,7 +265,9 @@ onMounted(async() => {
         :transport="data.path_details[completedSteps]?.transport ?? {}"
       />
     </div>
-    <div class="z-20 absolute bottom-2 mx-6 bg-gray-800 bg-opacity-85 w-5/6 px-6 py-4 rounded-xl select-none">
+    <div
+      class="z-20 absolute bottom-2 mx-6 bg-gray-800 bg-opacity-85 w-5/6 px-6 py-4 rounded-xl select-none"
+    >
       <BottomInfo
         :data="data.path_details[completedSteps] ?? {}"
         :hasNextStep="completedSteps < totalSteps - 1"
@@ -267,6 +277,10 @@ onMounted(async() => {
       />
     </div>
     <LoadingDialog v-if="LoadingDialogVisable" />
-    <PopUpDoalog v-if="PopUpDoalogVisable" :title="popuptitle" @close="PopUpDoalogVisable = false" />
+    <PopUpDoalog
+      v-if="PopUpDoalogVisable"
+      :title="popuptitle"
+      @close="PopUpDoalogVisable = false"
+    />
   </div>
 </template>
