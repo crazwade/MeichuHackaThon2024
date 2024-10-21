@@ -8,7 +8,6 @@ const router = useRouter();
 
 const currentIndex = ref<number>(0)
 const search = ref<string>('')
-const searchTmp = ref<string>('')
 const searchAlert = ref(false)
 const fuzzyList = ref<string[]>([]);
 const fuzzyDialog = ref(false);
@@ -24,12 +23,6 @@ const selectFromList = (item: string) => {
 }
 
 const fuzzySearch = async () => {
-  fuzzyList.value = fuzzyList.value.filter((item) => item.includes(search.value));
-  if (searchTmp.value === search.value || search.value === '') {
-    return;
-  }
-  searchAlert.value = false;
-  searchTmp.value = search.value;
 
   await refreshFuzzyList();
 }
@@ -51,8 +44,8 @@ const refreshFuzzyList = async () => {
 
   const response = await getFuzzySearchList(payload);
 
-  // todo 錯誤處理
   if (!response.success) {
+    fuzzyList.value = [];
     return;
   }
 
@@ -120,9 +113,3 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-
-<style scpoe>
-::-webkit-scrollbar {
-  display: none;
-}
-</style>
