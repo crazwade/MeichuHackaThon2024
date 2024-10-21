@@ -1,4 +1,4 @@
-# 2024 梅竹黑客松 創客交流組
+# [2024 梅竹黑客松 創客交流組](https://2024.meichuhackathon.org/)
 
 ---
 [Hackmd 規格文件](https://hackmd.io/1iap9gb8SVe7dZ1mxbrRRw?view)
