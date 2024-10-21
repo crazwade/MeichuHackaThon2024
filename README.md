@@ -35,3 +35,9 @@
   - 路線細項資訊：時長、交通種類、目的地、終點
   - 地圖
 
+- 建議頁面
+  - [<img src="https://github.com/user-attachments/assets/2dd7a3b5-6e38-4dd4-aaa6-134a25f04ee7" height="300"/>](image.png)
+  - 將各種新竹政府 opendata 資源統整
+  - 項目選擇：觀光景點、美食、廁所、公園
+  - 項目內下：名稱、地址、簡介、按鈕轉向路徑選擇頁面
+
