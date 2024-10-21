@@ -22,6 +22,7 @@ const data = reactive<Path>({
     公車: 0,
     Bike: 0,
     步行: 0,
+    共乘: 0,
   },
   crowding: 0,
   path_details: [] as PathDetail[],

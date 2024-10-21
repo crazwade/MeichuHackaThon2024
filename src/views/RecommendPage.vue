@@ -1,22 +1,17 @@
 <script setup lang="ts">
 import { getRecommendList } from "../api";
-import type { GetRecommendListPayload } from "../api";
+import type { GetRecommendListPayload, CategoryType, RecommendItem } from "../api";
 
 const router = useRouter();
 
-const selectType = ref<"觀光景點" | "美食" | "廁所" | "公園">("觀光景點");
-const types = ref<string[]>(["觀光景點", "美食", "公園", "廁所"]);
+const selectType = ref<CategoryType>("觀光景點");
+const types = ref<CategoryType[]>(["觀光景點", "美食", "公園", "廁所"]);
 const selectDivIndex = ref<number>(-1);
 const recommendList = ref<
-  {
-    名稱: string;
-    地址: string;
-    備註: string;
-    src: string;
-  }[]
+  RecommendItem[]
 >([]);
 
-const getList = async (type: "觀光景點" | "美食" | "廁所" | "公園") => {
+const getList = async (type: CategoryType) => {
   selectType.value = type;
 
   const payload: GetRecommendListPayload = {
@@ -25,10 +20,9 @@ const getList = async (type: "觀光景點" | "美食" | "廁所" | "公園") =>
 
   const response = await getRecommendList(payload);
 
-  console.log(response);
-
-  // todo 錯誤處理
   if (!response.success) {
+
+    recommendList.value = [];
     return;
   }
 
@@ -69,7 +63,9 @@ onMounted(() => {
       </div>
     </div>
     <div class="overflow-x-scroll">
-      <div v-if="recommendList.length === 0">empty</div>
+      <div v-if="recommendList.length === 0" class="text-white">
+        尚無資料...
+      </div>
       <div v-else class="flex flex-wrap justify-center gap-3 relative">
         <div
           v-for="(item, index) in recommendList"

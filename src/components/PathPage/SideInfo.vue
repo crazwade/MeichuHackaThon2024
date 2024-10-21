@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import RadialProgress from "vue3-radial-progress";
+import type { vehicle } from "@/api/type";
 
 defineProps<{
   costTime: string;
   completedSteps: number;
   totalSteps: number;
   transport: {
-    type: "公車" | "Bike" | "步行";
+    type: vehicle;
     remark: string;
   };
 }>();
