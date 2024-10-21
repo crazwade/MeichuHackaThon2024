@@ -2,11 +2,13 @@ import axios from "axios";
 import type { Response } from "./transformResponse";
 import { transformResponse } from "./transformResponse";
 
+export type CategoryType = '觀光景點' | '美食' | '公園' | '廁所';
+
 export interface GetRecommendListPayload {
-  type: "觀光景點" | "美食" | "廁所" | "公園";
+  type: CategoryType;
 }
 
-interface Item {
+export interface RecommendItem {
   名稱: string;
   地址: string;
   備註: string;
@@ -18,7 +20,7 @@ interface Item {
  */
 export async function getRecommendList(
   payload: GetRecommendListPayload,
-): Promise<Response<Item[]>> {
+): Promise<Response<RecommendItem[]>> {
   const { type } = payload;
   try {
     // const response = await axios.get('/getRecommendList', {
@@ -27,7 +29,7 @@ export async function getRecommendList(
     //   }
     // });
 
-    const response: Item[] = await new Promise((resolve, reject) => {
+    const response: RecommendItem[] = await new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(mockData[type] ?? []);
       }, 50);
