@@ -2,7 +2,7 @@ import axios from "axios";
 import type { Response } from "./transformResponse";
 import { transformResponse } from "./transformResponse";
 
-export type CategoryType = '觀光景點' | '美食' | '公園' | '廁所';
+export type CategoryType = "觀光景點" | "美食" | "公園" | "廁所";
 
 export interface GetRecommendListPayload {
   type: CategoryType;

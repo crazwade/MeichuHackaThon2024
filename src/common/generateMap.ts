@@ -24,20 +24,20 @@ export const generateMap = (
   // 初始化地圖
   map = Leaflet.map(id, {
     center: [totalLng / locs.length, totalLat / locs.length],
-    zoom: 100,
+    zoom: 16,
   });
 
   // todo point myself
-  console.log(map.locate());
+  // console.log(map.locate());
 
   // 監聽地圖事件
-  map.on("click", function (e) {
-    const container = Leaflet.DomUtil.create("div"),
-      startBtn = createButton("Start from this location", container),
-      destBtn = createButton("Go to this location", container);
+  // map.on("click", function (e) {
+  //   const container = Leaflet.DomUtil.create("div"),
+  //     startBtn = createButton("Start from this location", container),
+  //     destBtn = createButton("Go to this location", container);
 
-    Leaflet.popup().setContent(container).setLatLng(e.latlng).openOn(map);
-  });
+  //   Leaflet.popup().setContent(container).setLatLng(e.latlng).openOn(map);
+  // });
   // 地圖圖層
   Leaflet.tileLayer(
     "https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m3!1e0!2sm!3i349018013!3m9!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!4e0",

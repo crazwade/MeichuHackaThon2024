@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { getRecommendList } from "../api";
-import type { GetRecommendListPayload, CategoryType, RecommendItem } from "../api";
+import type {
+  GetRecommendListPayload,
+  CategoryType,
+  RecommendItem,
+} from "../api";
 
 const router = useRouter();
 
 const selectType = ref<CategoryType>("觀光景點");
 const types = ref<CategoryType[]>(["觀光景點", "美食", "公園", "廁所"]);
 const selectDivIndex = ref<number>(-1);
-const recommendList = ref<
-  RecommendItem[]
->([]);
+const recommendList = ref<RecommendItem[]>([]);
 
 const getList = async (type: CategoryType) => {
   selectType.value = type;
@@ -21,7 +23,6 @@ const getList = async (type: CategoryType) => {
   const response = await getRecommendList(payload);
 
   if (!response.success) {
-
     recommendList.value = [];
     return;
   }

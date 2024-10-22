@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "run-p \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "format": "npx prettier . --write"
   },
   "dependencies": {
     "@fireworks-js/vue": "^2.10.8",
@@ -21,6 +22,7 @@
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "pinia": "^2.1.7",
+    "prettier": "^3.3.3",
     "vue": "^3.4.29",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.3.3",

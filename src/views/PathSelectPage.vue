@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { GetPathListPayload } from "@/api";
-import { getPathList } from "@/api";
-import PathCard from "@/components/PathSelectionPage/PathCard.vue";
-import PDetail from "@/components/PathSelectionPage/PDetail.vue";
-import type { Path, PathDetail } from "@/type";
-import { generateMap } from "../common/generateMap";
-import LoadingDialog from "../components/LoadingDialog.vue";
+import type { GetPathListPayload } from '@/api';
+import { getPathList } from '@/api';
+import PathCard from '@/components/PathSelectionPage/PathCard.vue';
+import PDetail from '@/components/PathSelectionPage/PDetail.vue';
+import type { Path, PathDetail } from '@/type';
+import { generateMap } from '../common/generateMap';
+import LoadingDialog from '../components/LoadingDialog.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -39,7 +39,7 @@ const pathCardClick = (id: number) => {
       };
     });
 
-    const timestampDiv = document.createElement("div");
+    const timestampDiv = document.createElement('div');
     const oldMap = document.getElementById(`map${mapId.value}`);
     if (oldMap) {
       oldMap.remove();
@@ -47,8 +47,8 @@ const pathCardClick = (id: number) => {
     mapId.value = Date.now();
     timestampDiv.id = `map` + mapId.value.toString();
     mapRef.value?.appendChild(timestampDiv);
-    document.getElementById(timestampDiv.id)!.style.height = "100dvh";
-    document.getElementById(timestampDiv.id)!.style.width = "100dvw";
+    document.getElementById(timestampDiv.id)!.style.height = '100%';
+    document.getElementById(timestampDiv.id)!.style.width = '100%';
 
     generateMap([...locs, ...newlocs], timestampDiv.id);
   }
@@ -59,7 +59,7 @@ const nextStep = () => {
     return;
   }
 
-  router.push({ name: "PathPage", query: { id: pathSelect.value } });
+  router.push({ name: 'PathPage', query: { id: pathSelect.value } });
 };
 
 onMounted(async () => {
@@ -82,49 +82,17 @@ onMounted(async () => {
       lat: response.data[0].path_details[0].location.gps.lat,
     },
   ];
-  const timestampDiv = document.createElement("div");
+  const timestampDiv = document.createElement('div');
   mapId.value = Date.now();
   timestampDiv.id = `map` + mapId.value.toString();
   mapRef.value?.appendChild(timestampDiv);
-  document.getElementById(timestampDiv.id)!.style.height = "100dvh";
-  document.getElementById(timestampDiv.id)!.style.width = "100dvw";
+  document.getElementById(timestampDiv.id)!.style.height = '100%';
+  document.getElementById(timestampDiv.id)!.style.width = '100%';
 
   generateMap(locs, timestampDiv.id);
 
   LoadingDialogVisable.value = false;
 });
-
-const calctime = (s: string) => {
-  const timePartition = s.split(" ");
-
-  if (timePartition.length == 1) {
-    let minString = timePartition[0];
-    const extraIndex = minString.match(/m/)?.index;
-    return Number.parseInt(minString.slice(extraIndex));
-  }
-
-  let hourString = timePartition[0],
-    minString = timePartition[1];
-  const extraInd1 = hourString.match(/h/)?.index;
-  const extraInd2 = minString.match(/m/)?.index;
-
-  const hours = Number.parseInt(hourString.slice(extraInd1));
-  const mins = Number.parseInt(minString.slice(extraInd2));
-  return hours * 60 + mins;
-};
-
-const calcPercentage = (
-  details: PathDetail[],
-  type: "公車" | "Bike" | "步行",
-) => {
-  const total = details.reduce((acc, cur) => calctime(cur.costTime) + acc, 0);
-  const timePortion = details
-    .filter((each) => typeof each.transport.type === typeof type)
-    .reduce((acc, cur) => calctime(cur.costTime) + acc, 0);
-
-  const percentage = `${Math.round(total / timePortion)} %`;
-  return percentage;
-};
 </script>
 
 <template>

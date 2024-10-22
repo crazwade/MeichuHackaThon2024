@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import SideInfo from "../components/PathPage/SideInfo.vue";
-import BottomInfo from "../components/PathPage/BottomInfo.vue";
-import LoadingDialog from "../components/LoadingDialog.vue";
-import PopUpDoalog from "../components/PathPage/PopUpDoalog.vue";
-import { getPathDetailList } from "../api";
-import type { GetPathDetailListPayload } from "../api";
-import type { Path, PathDetail } from "../type";
-import { generateMap } from "../common/generateMap";
+import SideInfo from '../components/PathPage/SideInfo.vue';
+import BottomInfo from '../components/PathPage/BottomInfo.vue';
+import LoadingDialog from '../components/LoadingDialog.vue';
+import PopUpDoalog from '../components/PathPage/PopUpDoalog.vue';
+import { getPathDetailList } from '../api';
+import type { GetPathDetailListPayload } from '../api';
+import type { Path, PathDetail } from '../type';
+import { generateMap } from '../common/generateMap';
 
 const route = useRoute();
 const router = useRouter();
-const popuptitle = ref("");
+const popuptitle = ref('');
 const mapId = ref<number>(0);
 const data = reactive<Path>({
   id: 0,
-  destination: "-",
-  location: "-",
-  costTime: "-",
-  arrivalTime: "-",
+  destination: '-',
+  location: '-',
+  costTime: '-',
+  arrivalTime: '-',
   transportComp: {
     公車: 0,
     Bike: 0,
@@ -34,8 +34,8 @@ const totalSteps = ref<number>(0);
 const LoadingDialogVisable = ref<boolean>(false);
 const PopUpDoalogVisable = ref<boolean>(false);
 
-const steps = (action: "next" | "pervious") => {
-  if (action === "next") {
+const steps = (action: 'next' | 'pervious') => {
+  if (action === 'next') {
     if (completedSteps.value === totalSteps.value) {
       return;
     }
@@ -55,7 +55,7 @@ const steps = (action: "next" | "pervious") => {
       },
     ];
 
-    const timestampDiv = document.createElement("div");
+    const timestampDiv = document.createElement('div');
     const oldMap = document.getElementById(`map${mapId.value}`);
     if (oldMap) {
       oldMap.remove();
@@ -63,17 +63,17 @@ const steps = (action: "next" | "pervious") => {
     mapId.value = Date.now();
     timestampDiv.id = `map` + mapId.value.toString();
     mapRef.value?.appendChild(timestampDiv);
-    document.getElementById(timestampDiv.id)!.style.height = "100dvh";
-    document.getElementById(timestampDiv.id)!.style.width = "100dvw";
+    document.getElementById(timestampDiv.id)!.style.height = '100%';
+    document.getElementById(timestampDiv.id)!.style.width = '100%';
 
     generateMap(locs, timestampDiv.id);
 
     if (completedSteps.value === totalSteps.value) {
-      handlePopUpDialog("抵達");
+      handlePopUpDialog('抵達');
     }
   }
 
-  if (action === "pervious") {
+  if (action === 'pervious') {
     if (completedSteps.value === 0) {
       return;
     }
@@ -93,7 +93,7 @@ const steps = (action: "next" | "pervious") => {
       },
     ];
 
-    const timestampDiv = document.createElement("div");
+    const timestampDiv = document.createElement('div');
     const oldMap = document.getElementById(`map${mapId.value}`);
     if (oldMap) {
       oldMap.remove();
@@ -101,8 +101,8 @@ const steps = (action: "next" | "pervious") => {
     mapId.value = Date.now();
     timestampDiv.id = `map` + mapId.value.toString();
     mapRef.value?.appendChild(timestampDiv);
-    document.getElementById(timestampDiv.id)!.style.height = "100dvh";
-    document.getElementById(timestampDiv.id)!.style.width = "100dvw";
+    document.getElementById(timestampDiv.id)!.style.height = '100%';
+    document.getElementById(timestampDiv.id)!.style.width = '100%';
 
     generateMap(locs, timestampDiv.id);
   }
@@ -124,9 +124,9 @@ watch(
     });
 
     if (step === totalSteps.value) {
-      handlePopUpDialog("抵達");
+      handlePopUpDialog('抵達');
     }
-  },
+  }
 );
 
 // import * as Leaflet from "leaflet";
@@ -194,7 +194,7 @@ onMounted(async () => {
   // todo 未正確傳遞 query string value 導回首頁
   if (!id) {
     LoadingDialogVisable.value = false;
-    handlePopUpDialog("路徑編號錯誤");
+    handlePopUpDialog('路徑編號錯誤');
     return;
   }
 
@@ -234,12 +234,12 @@ onMounted(async () => {
     },
   ];
 
-  const timestampDiv = document.createElement("div");
+  const timestampDiv = document.createElement('div');
   mapId.value = Date.now();
   timestampDiv.id = `map` + mapId.value.toString();
   mapRef.value?.appendChild(timestampDiv);
-  document.getElementById(timestampDiv.id)!.style.height = "100dvh";
-  document.getElementById(timestampDiv.id)!.style.width = "100dvw";
+  document.getElementById(timestampDiv.id)!.style.height = '100dvh';
+  document.getElementById(timestampDiv.id)!.style.width = '100dvw';
 
   generateMap(locs, timestampDiv.id);
 });
