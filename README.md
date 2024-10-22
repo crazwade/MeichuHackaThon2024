@@ -26,15 +26,19 @@
   - 模糊搜尋
 
 - 路徑選擇頁面
-
-  - [<img src="https://github.com/user-attachments/assets/94cc8ef8-8761-4099-a5b2-50a49f9ae838" height="400"/>](image.png)
+  <div style='display: flex;'> 
+    <img src="https://github.com/user-attachments/assets/2a0d9d02-fb4b-46a1-bab8-9d018fe0c8df" height="400" alt="crazwade" /> 
+    <img src="https://github.com/user-attachments/assets/fbbfc87d-e80f-4abf-9dd6-df705b0324a9" height="400" alt="crazwade" /> 
+  </div>
   - 路線選擇
   - 路線詳細資訊：時長、交通總成、路程詳細資訊
   - 地圖
 
 - 導航頁面
-
-  - [<img src="https://github.com/user-attachments/assets/a4f47283-8799-461b-8e3e-76dd4dfc80dd" height="400"/>](image.png)
+  <div style='display: flex;'> 
+    <img src="https://github.com/user-attachments/assets/7b4089f1-7293-4eda-98b4-1ee3b248796f" height="400" alt="crazwade" /> 
+    <img src="https://github.com/user-attachments/assets/36f03aba-9b9f-4172-a1b6-171b3a0eadb1" height="400" alt="crazwade" /> 
+  </div>
   - 路徑完成圓形圖
   - 路線細項資訊：時長、交通種類、目的地、終點
   - 地圖
