@@ -3,12 +3,14 @@ import type { Path } from "@/type";
 
 const { path } = defineProps<{
   path: Path;
+  selected: boolean;
 }>();
 </script>
 
 <template>
   <div
-    class="w-full cursor-pointer bg-gray-800 hover:bg-gray-900 text-white py-3 px-2 font-bold text-3xl text-center select-none"
+    class="w-full cursor-pointer text-white py-3 px-2 font-bold text-3xl text-center select-none"
+    :class="[ selected ? 'bg-green-600' : 'bg-gray-800 hover:bg-gray-900']"
   >
     <label :for="path.id.toString()">
       <slot name="content">

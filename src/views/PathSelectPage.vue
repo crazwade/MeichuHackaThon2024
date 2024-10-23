@@ -50,7 +50,7 @@ const pathCardClick = (id: number) => {
     document.getElementById(timestampDiv.id)!.style.height = '100%';
     document.getElementById(timestampDiv.id)!.style.width = '100%';
 
-    generateMap([...locs, ...newlocs], timestampDiv.id);
+    // generateMap([...locs, ...newlocs], timestampDiv.id);
   }
 };
 
@@ -89,7 +89,7 @@ onMounted(async () => {
   document.getElementById(timestampDiv.id)!.style.height = '100%';
   document.getElementById(timestampDiv.id)!.style.width = '100%';
 
-  generateMap(locs, timestampDiv.id);
+  // generateMap(locs, timestampDiv.id);
 
   LoadingDialogVisable.value = false;
 });
@@ -97,15 +97,15 @@ onMounted(async () => {
 
 <template>
   <div class="flex relative bg-gray-800">
-    <nav class="h-auto z-10 relative">
-      <ul class="h-[100dvh] overflow-y-auto list-none flex flex-col">
+    <nav class="h-[100dvh] z-10 relative flex flex-col justify-center items-center">
+      <ul class="h-full overflow-y-auto list-none flex flex-col">
         <li
           v-for="path in pathData"
           :key="path.id"
           class="w-full border-b-2 border-white border-dashed bg-gray-400"
         >
           <div @click="pathCardClick(path.id)">
-            <PathCard :path="path" />
+            <PathCard :path="path" :selected="pathSelect === path.id" />
             <ul
               role="menu"
               :class="[
@@ -120,7 +120,7 @@ onMounted(async () => {
         </li>
       </ul>
       <div
-        class="absolute bottom-0 w-full h-fit py-3 cursor-pointer flex justify-center items-center text-2xl text-white font-extrabold"
+        class="h-fit w-full py-3 cursor-pointer flex justify-center items-center text-2xl text-white font-extrabold"
         :class="[
           pathSelect === -1
             ? 'bg-gray-600 cursor-not-allowed'

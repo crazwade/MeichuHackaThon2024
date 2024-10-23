@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import type { PathDetail } from "@/type";
 import Icon from "@/components/PathSelectionPage/Icon.vue";
-const { detail } = defineProps<{ detail: PathDetail }>();
-console.log(detail);
+const { detail } = defineProps<{
+  detail: PathDetail
+}>();
 </script>
 
 <template>
   <div
-    class="w-[90%] rounded-lg bg-[rgb(71,85,105,0.9)] text-white font-bold text-[length:inherit] text-center mx-auto px-2 py-1 my-1"
+    class="w-[90%] rounded-lg bg-gray-600 text-white font-bold text-[length:inherit] text-center mx-auto px-2 py-1 my-1"
   >
     <div class="flex items-center gap-2 max-w-full py-1">
       <Icon :trasport-type="detail.transport.type" />
